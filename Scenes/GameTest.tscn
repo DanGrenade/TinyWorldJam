@@ -10,14 +10,15 @@
 [node name="Camera2D" type="Camera2D" parent="."]
 rotating = true
 current = true
+zoom = Vector2( 4, 4 )
 script = ExtResource( 3 )
 player_follow_path = NodePath("../PlayerCharacter")
 
 [node name="GarbagePlanet" parent="." instance=ExtResource( 2 )]
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 1, 1 )
 
 [node name="PlayerCharacter" parent="." instance=ExtResource( 1 )]
-position = Vector2( 154.1, -143.743 )
+position = Vector2( 1.80859, -679.526 )
 gravity_body_path = NodePath("../GarbagePlanet")
 
 [node name="GarbageSpawner" type="Node" parent="."]

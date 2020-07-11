@@ -16,7 +16,6 @@ _global_script_class_icons={
 [application]
 
 config/name="TinyWorldJam"
-config/icon="res://Test Icons/icon.png"
 
 [input]
 

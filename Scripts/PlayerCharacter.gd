@@ -60,6 +60,21 @@ func _process(delta):
 		velocity.x = move_toward(velocity.x, 0, x_deccel_speed)
 		pass
 	
+	if velocity.x > 0.05:
+		$Sprite.flip_h = false
+		pass
+	elif velocity.x < -0.05:
+		$Sprite.flip_h = true
+		pass
+		
+	if abs(velocity.x) > 0.1:
+		$Sprite/AnimationPlayer.play("Run")
+		pass
+	else:
+		$Sprite/AnimationPlayer.play("Stationary")
+		pass
+	
+		
 	pass
 
 func _physics_process(delta):
