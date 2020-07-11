@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Test Icons/Circle.png" type="Texture" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 506.518
+
+[node name="Root Node" type="Node2D"]
+
+[node name="GarbagePlanet" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="GarbagePlanet"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GarbagePlanet/StaticBody2D"]
+position = Vector2( 0, -5.65686 )
+shape = SubResource( 1 )
