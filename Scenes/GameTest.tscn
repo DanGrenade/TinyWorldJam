@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/PlayerCharacter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/GarbagePlanet.tscn" type="PackedScene" id=2]
+
+[node name="GameTest" type="Node2D"]
+position = Vector2( 144.25, 726.906 )
+
+[node name="GarbagePlanet" parent="." instance=ExtResource( 2 )]
+position = Vector2( -4, 2 )
+
+[node name="PlayerCharacter" parent="." instance=ExtResource( 1 )]
+position = Vector2( 461.593, -565.045 )
+gravity_body_path = NodePath("../GarbagePlanet")
