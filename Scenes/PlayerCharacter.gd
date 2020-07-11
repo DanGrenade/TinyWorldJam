@@ -11,6 +11,11 @@ var grounded = false
 export var gravity = 9.8
 export var jumpVelocity = 300
 
+var xInput
+export var xAccel = 50
+export var max_x_speed = 500
+export var x_deccel_speed = 50
+
 func _ready():
 	gravity_body = get_node(gravity_body_path)
 	ground_raycast = get_node(ground_raycast_path)
@@ -19,7 +24,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	global_rotation = (position - gravity_body.position).angle() + (PI/2)
-		
+	
 	if grounded:
 		# Jump
 		if Input.is_action_just_pressed("jump"):
@@ -27,6 +32,34 @@ func _process(delta):
 			grounded = false
 			pass
 		pass
+	
+	#Get x input
+	xInput = 0
+	if Input.is_action_pressed("move_left"):
+		xInput += 1
+		pass
+	if Input.is_action_pressed("move_right"):
+		xInput -= 1
+		pass
+	
+	#Apply x input
+	if xInput != 0:
+		velocity.x += xInput * xAccel
+		
+		if abs(velocity.x) > max_x_speed:
+			if velocity.x > 0:
+				velocity.x = max_x_speed
+			else:
+				velocity.x = -max_x_speed
+			
+			pass
+		
+		pass
+	#If no x input, deccel
+	else:
+		velocity.x = move_toward(velocity.x, 0, x_deccel_speed)
+		pass
+	
 	pass
 
 func _physics_process(delta):
