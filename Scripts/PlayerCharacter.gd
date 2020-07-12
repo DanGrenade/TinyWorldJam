@@ -1,5 +1,9 @@
 extends KinematicBody2D
 
+signal player_hit
+export var max_health = 3
+var current_health
+
 var velocity = Vector2()
 var gravity_based_velocity = Vector2()
 
@@ -19,6 +23,12 @@ export var x_deccel_speed = 50
 func _ready():
 	gravity_body = get_node(gravity_body_path)
 	ground_raycast = get_node(ground_raycast_path)
+	
+	game_initialize()
+	pass
+
+func game_initialize():
+	current_health = max_health
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -96,4 +106,14 @@ func _physics_process(delta):
 	gravity_based_velocity = velocity.rotated((position - gravity_body.position).angle() - (PI/2))
 	
 	move_and_slide(gravity_based_velocity)
+	pass
+
+func hit():
+	current_health - 1
+	if current_health == 0:
+		#do death stuff here
+		pass
+	
+	emit_signal("player_hit")
+	
 	pass
