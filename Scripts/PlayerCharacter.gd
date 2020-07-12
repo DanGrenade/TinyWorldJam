@@ -9,7 +9,7 @@ export var ground_raycast_path = NodePath()
 var ground_raycast
 var grounded = false
 export var gravity = 9.8
-export var jumpVelocity = 300
+export var jumpVelocity = 900
 
 var xInput
 export var xAccel = 50
@@ -60,6 +60,7 @@ func _process(delta):
 		velocity.x = move_toward(velocity.x, 0, x_deccel_speed)
 		pass
 	
+	#Flip sprite based on movement direction
 	if velocity.x > 0.05:
 		$Sprite.flip_h = false
 		pass
@@ -67,6 +68,8 @@ func _process(delta):
 		$Sprite.flip_h = true
 		pass
 		
+	#Change animation based on state
+	#Note: May want to shift this control to a separate node if animation becomes more complex
 	if abs(velocity.x) > 0.1:
 		$Sprite/AnimationPlayer.play("Run")
 		pass

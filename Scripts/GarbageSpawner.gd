@@ -3,7 +3,7 @@ extends Node
 export var gravity_node_path = NodePath()
 var gravity_node
 
-export var start_distance = 600
+export var start_distance = 1600
 
 func _ready():
 	gravity_node = get_node(gravity_node_path)
@@ -11,9 +11,9 @@ func _ready():
 	
 func _process(delta):
 	
-	#if(Input.is_key_pressed(KEY_Z)):
-	#	spawn_trash()
-	#	pass
+	if(Input.is_key_pressed(KEY_Z)):
+		spawn_trash()
+		pass
 	pass
 
 func spawn_trash():
