@@ -24,4 +24,9 @@ gravity_body_path = NodePath("../GarbagePlanet")
 [node name="GarbageSpawner" type="Node" parent="."]
 script = ExtResource( 4 )
 gravity_node_path = NodePath("../GarbagePlanet")
+
+[node name="Timer" type="Timer" parent="GarbageSpawner"]
+wait_time = 3.0
+autostart = true
 [connection signal="player_hit" from="PlayerCharacter" to="Camera2D" method="_on_PlayerCharacter_player_hit"]
+[connection signal="timeout" from="GarbageSpawner/Timer" to="GarbageSpawner" method="_on_Timer_timeout"]

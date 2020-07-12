@@ -3,17 +3,11 @@ extends Node
 export var gravity_node_path = NodePath()
 var gravity_node
 
-export var start_distance = 1600
+export var start_distance = 2200
+
 
 func _ready():
 	gravity_node = get_node(gravity_node_path)
-	pass
-	
-func _process(delta):
-	
-	if(Input.is_key_pressed(KEY_Z)):
-		spawn_trash()
-		pass
 	pass
 
 func spawn_trash():
@@ -22,6 +16,8 @@ func spawn_trash():
 	
 	add_child(trash)
 	
-	
-	
 	pass
+
+func _on_Timer_timeout():
+	spawn_trash()
+	pass # Replace with function body.
