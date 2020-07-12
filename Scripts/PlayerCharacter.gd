@@ -9,10 +9,8 @@ var gravity_based_velocity = Vector2()
 
 export var gravity_body_path = NodePath()
 var gravity_body
-export var ground_raycast_path = NodePath()
-var ground_raycast
 var grounded = false
-export var gravity = 9.8
+export var gravity = 30
 export var jumpVelocity = 900
 
 var xInput
@@ -22,7 +20,6 @@ export var x_deccel_speed = 50
 
 func _ready():
 	gravity_body = get_node(gravity_body_path)
-	ground_raycast = get_node(ground_raycast_path)
 	
 	game_initialize()
 	pass
@@ -94,7 +91,7 @@ func _physics_process(delta):
 	
 	if not grounded:
 		# If we landed on an object, we're grounded.
-		if velocity.y < 0 and ground_raycast.is_colliding():
+		if velocity.y < 0 and ($RayCast2D_Left.is_colliding() or $RayCast2D_Right.is_colliding()):
 			grounded = true
 			velocity.y = 0
 			pass
@@ -102,6 +99,12 @@ func _physics_process(delta):
 		else:
 			velocity.y -= gravity
 			pass
+	else:
+		if !$RayCast2D_Left.is_colliding() and !$RayCast2D_Right.is_colliding():
+			grounded = false
+			pass
+		pass
+	
 	
 	gravity_based_velocity = velocity.rotated((position - gravity_body.position).angle() - (PI/2))
 	

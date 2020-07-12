@@ -26,10 +26,10 @@ func _physics_process(delta):
 		#If the below triggers, we've hit the player. Bounce off of them!
 		if collision_data:
 			if collision_data.collider.has_method("hit"):
+				collision_data.collider.hit()
 				current_state = state_floating
 				velocity = velocity.bounce(collision_data.normal)
 				move_and_collide(collision_data.remainder.bounce(collision_data.normal))
-				collision_data.collider.hit()
 				pass
 			pass
 		else:

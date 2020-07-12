@@ -45,7 +45,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-ground_raycast_path = NodePath("RayCast2D")
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 1.7461, 1.7461 )
@@ -61,6 +60,9 @@ anims/Stationary = SubResource( 3 )
 scale = Vector2( 0.888889, 4.66667 )
 shape = SubResource( 1 )
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D_Left" type="RayCast2D" parent="."]
+position = Vector2( -150, 0 )
 enabled = true
 cast_to = Vector2( 0, 300 )
+
+[node name="RayCast2D_Right" type="RayCast2D" parent="."]
