@@ -7,6 +7,7 @@ export var start_distance = 2200
 
 
 func _ready():
+	randomize()
 	gravity_node = get_node(gravity_node_path)
 	pass
 
