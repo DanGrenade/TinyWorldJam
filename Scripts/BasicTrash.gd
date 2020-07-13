@@ -61,11 +61,14 @@ func check_hit(collision_object, delta):
 	
 func setup_stationary():
 	current_state = state_stationary
+	
+	collision_layer = 2
+	$CollisionShape2D.disabled = true
+	$CollisionShape2D.disabled = false
 	global_rotation = (position - gravity_node.position).angle() + (PI/2)
 	move_and_collide(velocity)
 	$RayCast2D_Left.enabled = false
 	$RayCast2D_Right.enabled = false
-	collision_layer = 2
 	pass
 
 func place(new_position):
