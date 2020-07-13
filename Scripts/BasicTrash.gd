@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
 var gravity_node
+var original_parent
+
+export var grab_position = Vector2(120, -80)
 
 export var max_distance = 5000
 
@@ -15,8 +18,9 @@ func spawn(target, location):
 	gravity_node = target
 	
 	velocity = (gravity_node.global_position - global_position).normalized() * fall_speed
-	global_rotation = (position - gravity_node.position).angle() + (PI/2)
+	global_rotation = (position - gravity_node.global_position).angle() + (PI/2)
 	
+	original_parent = get_parent()
 	pass
 
 func _physics_process(delta):
@@ -52,10 +56,37 @@ func _physics_process(delta):
 	pass
 
 func check_hit(collision_object, delta):
+	setup_stationary()
+	pass
+	
+func setup_stationary():
 	current_state = state_stationary
 	global_rotation = (position - gravity_node.position).angle() + (PI/2)
-	move_and_collide(velocity * delta)
+	move_and_collide(velocity)
 	$RayCast2D_Left.enabled = false
 	$RayCast2D_Right.enabled = false
-	collision_layer = 1
+	collision_layer = 2
+	pass
+
+func place(new_position):
+	$CollisionShape2D.disabled = false
+	get_parent().remove_child(self)
+	original_parent.add_child(self)
+	
+	position = new_position
+	
+	velocity = (gravity_node.global_position - global_position).normalized() * fall_speed
+	
+	setup_stationary()
+	pass
+
+func grab(player):
+	$CollisionShape2D.disabled = true
+	
+	get_parent().remove_child(self)
+	player.add_child(self)
+	
+	position = grab_position
+	rotation = 0
+	
 	pass

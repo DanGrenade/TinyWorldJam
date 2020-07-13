@@ -12,9 +12,9 @@ func _ready():
 
 func spawn_trash():
 	var trash = preload("res://Scenes/BasicTrash.tscn").instance()
+	get_parent().add_child(trash)
 	trash.spawn(gravity_node, Vector2.UP.rotated(rand_range(0, 2 * PI)) * start_distance)
 	
-	add_child(trash)
 	
 	pass
 

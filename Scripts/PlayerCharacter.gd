@@ -4,6 +4,9 @@ signal player_hit
 export var max_health = 3
 var current_health
 
+var holding_trash = false
+var held_trash
+
 var velocity = Vector2()
 var gravity_based_velocity = Vector2()
 
@@ -28,7 +31,6 @@ func game_initialize():
 	current_health = max_health
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	global_rotation = (position - gravity_body.position).angle() + (PI/2)
 	
@@ -67,12 +69,56 @@ func _process(delta):
 		velocity.x = move_toward(velocity.x, 0, x_deccel_speed)
 		pass
 	
+	if Input.is_action_just_pressed("box_grab"):
+		if !holding_trash:
+			
+			var overlapping_bodies = $Area2D.get_overlapping_bodies()
+			var lowest_distance = 99999999999
+			var box_to_grab
+			
+			for body in overlapping_bodies:
+				var dist = global_position.distance_to(body.position)
+				if dist < lowest_distance:
+					lowest_distance = dist
+					box_to_grab = body
+				pass
+			pass
+			if box_to_grab != null && box_to_grab.has_method("grab"):
+				box_to_grab.grab(self)
+				holding_trash = true
+				held_trash = box_to_grab
+				if $Sprite.flip_h == false:
+					held_trash.position.x *= -1
+				pass
+			pass
+		else:
+			var garbage_placement = $BoxPlaceAreas.Find_Place_Position() 
+			if garbage_placement != null:
+				held_trash.place(garbage_placement)
+				
+				held_trash = null
+				holding_trash = false
+				
+				pass
+			pass
+	
 	#Flip sprite based on movement direction
 	if velocity.x > 0.05:
-		$Sprite.flip_h = false
+		if $Sprite.flip_h == true:
+			$Sprite.flip_h = false
+			$Area2D.position *= -1
+			$BoxPlaceAreas.position *= -1
+			if held_trash != null:
+				held_trash.position.x *= -1
+			pass
 		pass
 	elif velocity.x < -0.05:
-		$Sprite.flip_h = true
+		if $Sprite.flip_h != true:
+			$Sprite.flip_h = true
+			$Area2D.position *= -1
+			$BoxPlaceAreas.position *= -1
+			if held_trash != null:
+				held_trash.position.x *= -1
 		pass
 		
 	#Change animation based on state
@@ -119,4 +165,4 @@ func hit():
 	
 	emit_signal("player_hit")
 	
-	pass
+	pass 
