@@ -5,7 +5,6 @@ export var max_health = 3
 var current_health
 
 var holding_trash = false
-var held_trash
 
 var velocity = Vector2()
 var gravity_based_velocity = Vector2()
@@ -69,25 +68,30 @@ func _process(delta):
 		velocity.x = move_toward(velocity.x, 0, x_deccel_speed)
 		pass
 	
-	# if Input.is_action_just_pressed("box_grab"):
+	if Input.is_action_just_pressed("box_grab"):
+		if holding_trash == false:
+			if gravity_body.Check_Grab(rotation + (2 * PI / 12)):
+				$trash_placeholder2.visible = true
+				holding_trash = true
+				pass
+			pass
+		else:
+			gravity_body.drop_trash(rotation + (2 * PI / 12))
+			$trash_placeholder2.visible = false
+			holding_trash = false
+			pass
 	
 	#Flip sprite based on movement direction
 	if velocity.x > 0.05:
 		if $Sprite.flip_h == true:
 			$Sprite.flip_h = false
-			$Area2D.position *= -1
-			$BoxPlaceAreas.position *= -1
-			if held_trash != null:
-				held_trash.position.x *= -1
+			$trash_placeholder2.position.x *= -1
 			pass
 		pass
 	elif velocity.x < -0.05:
 		if $Sprite.flip_h != true:
 			$Sprite.flip_h = true
-			$Area2D.position *= -1
-			$BoxPlaceAreas.position *= -1
-			if held_trash != null:
-				held_trash.position.x *= -1
+			$trash_placeholder2.position.x *= -1
 		pass
 		
 	#Change animation based on state

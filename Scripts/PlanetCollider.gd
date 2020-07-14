@@ -13,18 +13,42 @@ func garbage_hit(collision_point):
 	
 	collision_positioner = floor(collision_positioner) as int
 	
-	if stacks[collision_positioner].size() + 1 <= 4:
-		match stacks[collision_positioner].size() + 1:
-			1:
-				stacks[collision_positioner].append(preload("res://Scenes/Trash_Pile1.tscn").instance())
-			2:
-				stacks[collision_positioner].append(preload("res://Scenes/Trash_Pile2.tscn").instance())
-			3:
-				stacks[collision_positioner].append(preload("res://Scenes/Trash_Pile3.tscn").instance())
-			4:
-				stacks[collision_positioner].append(preload("res://Scenes/Trash_Pile4.tscn").instance())
-		stacks[collision_positioner].back().rotation_degrees = collision_positioner * 60
-		add_child(stacks[collision_positioner].back())
-		pass
+	place_trash(collision_positioner)
 	
 	pass
+	
+func drop_trash(rotation):
+	rotation = convert_rotation_to_index(rotation)
+	place_trash(rotation)	
+	pass
+
+func place_trash(index):
+	if stacks[index].size() + 1 <= 4:
+		match stacks[index].size() + 1:
+			1:
+				stacks[index].append(preload("res://Scenes/Trash_Pile1.tscn").instance())
+			2:
+				stacks[index].append(preload("res://Scenes/Trash_Pile2.tscn").instance())
+			3:
+				stacks[index].append(preload("res://Scenes/Trash_Pile3.tscn").instance())
+			4:
+				stacks[index].append(preload("res://Scenes/Trash_Pile4.tscn").instance())
+		stacks[index].back().rotation_degrees = index * 60
+		add_child(stacks[index].back())
+		pass
+	pass
+
+func Check_Grab(rotation):
+	rotation = convert_rotation_to_index(rotation)
+	
+	if stacks[rotation].size() > 0:
+		stacks[rotation].back().queue_free()
+		stacks[rotation].pop_back()
+		
+		return true
+	else: return false
+
+func convert_rotation_to_index(rotation):
+	if rotation < 0: rotation += 2 * PI
+	return (rotation / (2 * PI / 6)) as int
+	
