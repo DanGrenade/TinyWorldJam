@@ -13,6 +13,8 @@ var current_state = state_falling
 export var fall_speed = 500
 var velocity = Vector2()
 
+signal Trash_Hit
+
 func spawn(target, location):
 	global_position = location
 	gravity_node = target
@@ -38,10 +40,10 @@ func _physics_process(delta):
 			pass
 		else:
 			if $RayCast2D_Left.is_colliding():
-				check_hit($RayCast2D_Left.get_collider(), delta)
+				check_hit($RayCast2D_Left.get_collider(), $RayCast2D_Left.get_collision_point())
 				pass
 			elif $RayCast2D_Right.is_colliding():
-				check_hit($RayCast2D_Right.get_collider(), delta)
+				check_hit($RayCast2D_Right.get_collider(), $RayCast2D_Right.get_collision_point())
 				pass
 			pass
 		pass
@@ -55,41 +57,7 @@ func _physics_process(delta):
 	
 	pass
 
-func check_hit(collision_object, delta):
-	setup_stationary()
-	pass
-	
-func setup_stationary():
-	current_state = state_stationary
-	
-	collision_layer = 2
-	$CollisionShape2D.disabled = true
-	$CollisionShape2D.disabled = false
-	global_rotation = (position - gravity_node.position).angle() + (PI/2)
-	move_and_collide(velocity)
-	$RayCast2D_Left.enabled = false
-	$RayCast2D_Right.enabled = false
-	pass
-
-func place(new_position):
-	$CollisionShape2D.disabled = false
-	get_parent().remove_child(self)
-	original_parent.add_child(self)
-	
-	position = new_position
-	
-	velocity = (gravity_node.global_position - global_position).normalized() * fall_speed
-	
-	setup_stationary()
-	pass
-
-func grab(player):
-	$CollisionShape2D.disabled = true
-	
-	get_parent().remove_child(self)
-	player.add_child(self)
-	
-	position = grab_position
-	rotation = 0
-	
+func check_hit(collision_object, collision_point):
+	gravity_node.garbage_hit(collision_point)
+	queue_free()
 	pass

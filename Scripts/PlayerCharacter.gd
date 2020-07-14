@@ -69,38 +69,7 @@ func _process(delta):
 		velocity.x = move_toward(velocity.x, 0, x_deccel_speed)
 		pass
 	
-	if Input.is_action_just_pressed("box_grab"):
-		if !holding_trash:
-			
-			var overlapping_bodies = $Area2D.get_overlapping_bodies()
-			var lowest_distance = 99999999999
-			var box_to_grab
-			
-			for body in overlapping_bodies:
-				var dist = global_position.distance_to(body.position)
-				if dist < lowest_distance:
-					lowest_distance = dist
-					box_to_grab = body
-				pass
-			pass
-			if box_to_grab != null && box_to_grab.has_method("grab"):
-				box_to_grab.grab(self)
-				holding_trash = true
-				held_trash = box_to_grab
-				if $Sprite.flip_h == false:
-					held_trash.position.x *= -1
-				pass
-			pass
-		else:
-			var garbage_placement = $BoxPlaceAreas.Find_Place_Position() 
-			if garbage_placement != null:
-				held_trash.place(garbage_placement)
-				
-				held_trash = null
-				holding_trash = false
-				
-				pass
-			pass
+	# if Input.is_action_just_pressed("box_grab"):
 	
 	#Flip sprite based on movement direction
 	if velocity.x > 0.05:
