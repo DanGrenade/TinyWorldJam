@@ -2,6 +2,8 @@ extends Node
 
 export var gravity_node_path = NodePath()
 var gravity_node
+export var alien_node_path = NodePath()
+var alien_node
 
 export var start_distance = 2200
 
@@ -9,6 +11,11 @@ export var start_distance = 2200
 func _ready():
 	randomize()
 	gravity_node = get_node(gravity_node_path)
+	alien_node = get_node(alien_node_path)
+	
+	var bomb = preload("res://Scenes/Bomb.tscn").instance()
+	add_child(bomb)
+	bomb.initialize(gravity_node, alien_node)
 	pass
 
 func spawn_trash():

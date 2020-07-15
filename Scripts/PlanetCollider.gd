@@ -4,16 +4,10 @@ var stacks = [Array(), Array(), Array(), Array(), Array(), Array()]
 
 
 func garbage_hit(collision_point):
-	var collision_positioner = (collision_point - position).angle() + (120 * (PI / 180))
 	
+	collision_point = convert_position_to_index(collision_point)
 	
-	collision_positioner /= ((2 * PI) / 6)
-	if collision_positioner < 0: 
-		collision_positioner += 6
-	
-	collision_positioner = floor(collision_positioner) as int
-	
-	place_trash(collision_positioner)
+	place_trash(collision_point)
 	
 	pass
 	
@@ -52,3 +46,22 @@ func convert_rotation_to_index(rotation):
 	if rotation < 0: rotation += 2 * PI
 	return (rotation / (2 * PI / 6)) as int
 	
+func convert_position_to_index(positioner):
+	positioner = (positioner - position).angle() + (120 * (PI / 180))
+	
+	
+	positioner /= ((2 * PI) / 6)
+	if positioner < 0: 
+		positioner += 6
+	
+	return floor(positioner) as int
+	
+func explode(explosion_position):
+	explosion_position = convert_position_to_index(explosion_position)
+	
+	for pile in stacks[explosion_position]:
+		pile.queue_free()
+		pass
+	stacks[explosion_position].clear()
+	
+	pass

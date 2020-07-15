@@ -4,6 +4,7 @@ signal player_hit
 export var max_health = 3
 var current_health
 
+var holding = false
 var holding_trash = false
 
 var velocity = Vector2()
@@ -69,29 +70,52 @@ func _process(delta):
 		pass
 	
 	if Input.is_action_just_pressed("box_grab"):
-		if holding_trash == false:
-			if gravity_body.Check_Grab(rotation + (2 * PI / 12)):
+		if holding && holding_trash == false:
+			if $BombPlace.get_child_count() == 0:
+				holding = false
+				pass
+			pass
+		
+		if holding == false:
+			if $BombCheck.get_overlapping_bodies():
+				var bomb = $BombCheck.get_overlapping_bodies().front()
+				holding = true
+				holding_trash = false
+				bomb.pickup($BombPlace)
+				
+				pass
+			elif gravity_body.Check_Grab(rotation + (2 * PI / 12)):
 				$trash_placeholder2.visible = true
+				holding = true
 				holding_trash = true
 				pass
 			pass
 		else:
-			gravity_body.drop_trash(rotation + (2 * PI / 12))
-			$trash_placeholder2.visible = false
-			holding_trash = false
-			pass
+			if holding_trash == false:
+				$BombPlace.get_child(0).place(global_position)
+				holding = false
+				pass
+			else:
+				gravity_body.drop_trash(rotation + (2 * PI / 12))
+				$trash_placeholder2.visible = false
+				holding = false
+				pass
 	
 	#Flip sprite based on movement direction
 	if velocity.x > 0.05:
 		if $Sprite.flip_h == true:
 			$Sprite.flip_h = false
 			$trash_placeholder2.position.x *= -1
+			$BombCheck.position.x *= -1
+			$BombPlace.position.x *= -1
 			pass
 		pass
 	elif velocity.x < -0.05:
 		if $Sprite.flip_h != true:
 			$Sprite.flip_h = true
 			$trash_placeholder2.position.x *= -1
+			$BombCheck.position.x *= -1
+			$BombPlace.position.x *= -1
 		pass
 		
 	#Change animation based on state

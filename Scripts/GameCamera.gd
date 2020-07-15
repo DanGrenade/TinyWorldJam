@@ -24,7 +24,7 @@ func _process(delta):
 			do_shake()
 			pass
 		pass
-	# global_rotation = player_follow_node.global_rotation
+	#global_rotation = player_follow_node.global_rotation
 	
 	pass
 
