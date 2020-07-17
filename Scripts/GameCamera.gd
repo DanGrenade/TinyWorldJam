@@ -1,5 +1,7 @@
 extends Camera2D
 
+var game_paused = false
+
 export var player_follow_path = NodePath()
 var player_follow_node
 
@@ -13,6 +15,7 @@ func _ready():
 	pass
 
 func _process(delta):
+	if game_paused: return
 	
 	if shaking:
 		current_shake = move_toward(current_shake, 0, shake_reduction * delta)
@@ -39,4 +42,9 @@ func _on_PlayerCharacter_player_hit():
 	current_shake = max_shake
 	do_shake()
 	
+	pass 
+
+
+func _on_GameManager_switch_game_state_signal(paused_state):
+	game_paused = paused_state	
 	pass 

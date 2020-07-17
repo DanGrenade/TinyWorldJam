@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var game_stopped = false
+
 signal player_hit
 export var max_health = 3
 var current_health
@@ -32,6 +34,8 @@ func game_initialize():
 	pass
 
 func _process(delta):
+	if game_stopped: return
+	
 	global_rotation = (position - gravity_body.position).angle() + (PI/2)
 	
 	if grounded:
@@ -131,6 +135,7 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
+	if game_stopped: return
 	
 	if not grounded:
 		# If we landed on an object, we're grounded.
@@ -163,3 +168,8 @@ func hit():
 	emit_signal("player_hit")
 	
 	pass 
+
+
+func _on_GameManager_switch_game_state_signal(pause_state):
+	game_stopped = pause_state
+	pass

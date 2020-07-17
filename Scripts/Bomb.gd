@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var game_paused
+
 export var drop_velocity = 5
 var gravity_node
 var alien
@@ -16,6 +18,7 @@ func initialize(planet_node, alien_node):
 	alien = alien_node
 	
 	parent_node = get_parent()
+	parent_node.get_parent().connect("switch_game_state_signal", self, "_on_GameManager_switch_game_state_signal")
 	
 	drop_bomb()
 	pass
@@ -31,12 +34,10 @@ func drop_bomb():
 		pass
 	
 	pass
-	
-func _process(delta):
-	global_position - gravity_node.position
-	pass
 
 func _physics_process(delta):
+	if game_paused: return
+	
 	if current_state == state_falling:
 		velocity = (gravity_node.global_position - global_position).normalized() * drop_velocity
 		
@@ -74,4 +75,16 @@ func _on_ExplosionTimer_timeout():
 	gravity_node.explode(position)
 	drop_bomb()
 	
+	pass
+	
+func _on_GameManager_switch_game_state_signal(pause_state):
+	game_paused = pause_state
+	if game_paused:
+		$bomb/AnimationPlayer.stop(false)
+		$ExplosionTimer.paused = true
+		pass
+	else: 
+		$bomb/AnimationPlayer.play()
+		$ExplosionTimer.paused = false
+		pass
 	pass

@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var game_paused = false
+
 var gravity_node
 var original_parent
 
@@ -23,9 +25,12 @@ func spawn(target, location):
 	global_rotation = (position - gravity_node.global_position).angle() + (PI/2)
 	
 	original_parent = get_parent()
+	original_parent.connect("switch_game_state_signal", self, "_on_GameManager_switch_game_state_signal")
 	pass
 
 func _physics_process(delta):
+	if game_paused: return
+	
 	if current_state == state_falling:
 		
 		var collision_data = move_and_collide(velocity * delta)
@@ -60,4 +65,8 @@ func _physics_process(delta):
 func check_hit(collision_object, collision_point):
 	gravity_node.garbage_hit(collision_point)
 	queue_free()
+	pass
+	
+func _on_GameManager_switch_game_state_signal(pause_state):
+	game_paused = pause_state
 	pass

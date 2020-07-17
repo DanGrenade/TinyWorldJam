@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var game_paused = false
+
 export var float_adjustment = 1
 export var float_speed = 1.5
 export var ship_speed = 10
@@ -17,10 +19,13 @@ func _ready():
 	pass
 
 func _process(delta):
+	if game_paused: return
+	
 	$ufo.global_rotation = (position - planet_node.position).angle() + (1.5 * PI/2)
 	pass
 
 func _physics_process(delta):
+	if game_paused: return
 	
 	velocity.y = sin(OS.get_unix_time() * float_speed) * float_adjustment
 	
@@ -33,3 +38,8 @@ func _physics_process(delta):
 		pass
 	
 	pass
+
+
+func _on_GameManager_switch_game_state_signal(pause_state):
+	game_paused = pause_state
+	pass 
