@@ -11,6 +11,7 @@ func _ready():
 	pass
 
 func _on_TextureButton_focus_entered():
+	print(name)
 	modulate = focus_color
 	pass
 

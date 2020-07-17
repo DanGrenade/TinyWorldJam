@@ -39,3 +39,24 @@ func _on_Start_Menu_Continue_Button_Pressed():
 	current_state = state_playing
 	continue_game()	
 	pass
+
+func game_over():
+	stop_game()
+	$GameOver.visible = true
+	$GameOver.give_focus()
+	pass
+
+
+func _on_Alien_Ship_ship_hit():
+	game_over()
+	pass
+
+
+func _on_PlayerCharacter_player_death():
+	game_over()
+	pass 
+
+
+func _on_GameOver_Replay_Signal():
+	get_tree().reload_current_scene()	
+	pass 

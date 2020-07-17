@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal ship_hit
+
 var game_paused = false
 
 export var float_adjustment = 1
@@ -31,7 +33,8 @@ func _physics_process(delta):
 	
 	var gravity_based_velocity = velocity.rotated((position - planet_node.position).angle() - (PI/2))
 	
-	move_and_collide(gravity_based_velocity)
+	var collision = move_and_collide(gravity_based_velocity)
+	if collision: emit_signal("ship_hit")
 	
 	if position.distance_to(planet_node.position) > max_distance:
 		position = position.move_toward(planet_node.position, position.distance_to(planet_node.position) - max_distance)

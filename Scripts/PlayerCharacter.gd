@@ -1,10 +1,12 @@
 extends KinematicBody2D
 
+
 var game_stopped = false
 
 signal player_hit
 export var max_health = 3
 var current_health
+signal player_death
 
 var holding = false
 var holding_trash = false
@@ -162,7 +164,7 @@ func _physics_process(delta):
 func hit():
 	current_health - 1
 	if current_health == 0:
-		#do death stuff here
+		emit_signal("player_death")
 		pass
 	
 	emit_signal("player_hit")
