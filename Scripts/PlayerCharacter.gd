@@ -3,6 +3,8 @@ extends KinematicBody2D
 var game_stopped = false
 
 signal player_hit
+signal player_jump
+signal player_interact
 export var max_health = 3
 var current_health
 
@@ -74,6 +76,7 @@ func _process(delta):
 		pass
 	
 	if Input.is_action_just_pressed("box_grab"):
+		emit_signal("player_interact")
 		if holding && holding_trash == false:
 			if $BombPlace.get_child_count() == 0:
 				holding = false
@@ -146,6 +149,7 @@ func _physics_process(delta):
 		# Otherwise, apply gravity
 		else:
 			velocity.y -= gravity
+			#emit_signal("player_jump")
 			pass
 	else:
 		if !$RayCast2D_Left.is_colliding() and !$RayCast2D_Right.is_colliding():

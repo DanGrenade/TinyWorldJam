@@ -74,6 +74,7 @@ func place(position):
 func _on_ExplosionTimer_timeout():
 	gravity_node.explode(position)
 	drop_bomb()
+	$AudioStreamPlayer2D.play()
 	
 	pass
 	
