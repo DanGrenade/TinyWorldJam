@@ -15,8 +15,8 @@ func _on_TextureButton_pressed():
 	emit_signal("Start_Button_Pressed")
 	
 	visible = false
-	$VBoxContainer/TextureButton.visible = false
-	$VBoxContainer/TextureButton3.visible = true
+	$YSort/VBoxContainer/TextureButton.visible = false
+	$YSort/VBoxContainer/TextureButton3.visible = true
 	pass 
 
 #Continue Button Pressed

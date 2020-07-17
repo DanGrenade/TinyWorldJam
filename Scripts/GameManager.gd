@@ -26,6 +26,8 @@ func stop_game():
 
 func continue_game():
 	emit_signal("switch_game_state_signal", false)
+	$Audio.play_game_bg()
+	$Audio.play_confirm_sfx()
 	pass
 
 

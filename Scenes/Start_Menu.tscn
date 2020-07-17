@@ -19,7 +19,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="YSort" type="YSort" parent="."]
+z_index = 1
+
+[node name="ColorRect" type="ColorRect" parent="YSort"]
+modulate = Color( 1, 1, 1, 0.411765 )
+margin_right = 1028.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="YSort"]
 margin_left = 214.002
 margin_top = 1.7818
 margin_right = 824.002
@@ -32,7 +44,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="YSort/VBoxContainer"]
 modulate = Color( 0.87451, 0.87451, 0.87451, 1 )
 margin_left = 6.0
 margin_top = 63.0
@@ -51,7 +63,7 @@ normal_color = Color( 0.87451, 0.87451, 0.87451, 1 )
 focus_color = Color( 1, 1, 1, 1 )
 pressed_color = Color( 0.870588, 0.894118, 1, 1 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/TextureButton"]
+[node name="RichTextLabel" type="RichTextLabel" parent="YSort/VBoxContainer/TextureButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 46.0
@@ -65,13 +77,12 @@ custom_colors/selection_color = Color( 0.647059, 0.67451, 0.737255, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Start[/center]"
 text = "Start"
-fit_content_height = true
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton3" type="TextureButton" parent="VBoxContainer"]
+[node name="TextureButton3" type="TextureButton" parent="YSort/VBoxContainer"]
 visible = false
 modulate = Color( 0.87451, 0.87451, 0.87451, 1 )
 margin_left = 6.0
@@ -90,7 +101,7 @@ normal_color = Color( 0.87451, 0.87451, 0.87451, 1 )
 focus_color = Color( 1, 1, 1, 1 )
 pressed_color = Color( 0.870588, 0.894118, 1, 1 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/TextureButton3"]
+[node name="RichTextLabel" type="RichTextLabel" parent="YSort/VBoxContainer/TextureButton3"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 40.1716
@@ -104,13 +115,12 @@ custom_colors/selection_color = Color( 0.647059, 0.67451, 0.737255, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Continue[/center]"
 text = "Continue"
-fit_content_height = true
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton2" type="TextureButton" parent="VBoxContainer"]
+[node name="TextureButton2" type="TextureButton" parent="YSort/VBoxContainer"]
 modulate = Color( 0.87451, 0.87451, 0.87451, 1 )
 margin_top = 300.0
 margin_right = 610.0
@@ -121,7 +131,7 @@ normal_color = Color( 0.87451, 0.87451, 0.87451, 1 )
 focus_color = Color( 1, 1, 1, 1 )
 pressed_color = Color( 0.870588, 0.894118, 1, 1 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/TextureButton2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="YSort/VBoxContainer/TextureButton2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 54.0
@@ -135,22 +145,21 @@ custom_colors/selection_color = Color( 0.647059, 0.67451, 0.737255, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Quit[/center]"
 text = "Quit"
-fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="button_down" from="VBoxContainer/TextureButton" to="VBoxContainer/TextureButton" method="_on_TextureButton_button_down"]
-[connection signal="button_up" from="VBoxContainer/TextureButton" to="VBoxContainer/TextureButton" method="_on_TextureButton_button_up"]
-[connection signal="focus_entered" from="VBoxContainer/TextureButton" to="VBoxContainer/TextureButton" method="_on_TextureButton_focus_entered"]
-[connection signal="focus_exited" from="VBoxContainer/TextureButton" to="VBoxContainer/TextureButton" method="_on_TextureButton_focus_exited"]
-[connection signal="pressed" from="VBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
-[connection signal="button_down" from="VBoxContainer/TextureButton3" to="VBoxContainer/TextureButton3" method="_on_TextureButton_button_down"]
-[connection signal="button_up" from="VBoxContainer/TextureButton3" to="VBoxContainer/TextureButton3" method="_on_TextureButton_button_up"]
-[connection signal="focus_entered" from="VBoxContainer/TextureButton3" to="VBoxContainer/TextureButton3" method="_on_TextureButton_focus_entered"]
-[connection signal="focus_exited" from="VBoxContainer/TextureButton3" to="VBoxContainer/TextureButton3" method="_on_TextureButton_focus_exited"]
-[connection signal="pressed" from="VBoxContainer/TextureButton3" to="." method="_on_TextureButton3_pressed"]
-[connection signal="button_down" from="VBoxContainer/TextureButton2" to="VBoxContainer/TextureButton2" method="_on_TextureButton_button_down"]
-[connection signal="button_up" from="VBoxContainer/TextureButton2" to="VBoxContainer/TextureButton2" method="_on_TextureButton_button_up"]
-[connection signal="focus_entered" from="VBoxContainer/TextureButton2" to="VBoxContainer/TextureButton2" method="_on_TextureButton_focus_entered"]
-[connection signal="focus_exited" from="VBoxContainer/TextureButton2" to="VBoxContainer/TextureButton2" method="_on_TextureButton_focus_exited"]
-[connection signal="pressed" from="VBoxContainer/TextureButton2" to="." method="_on_TextureButton2_pressed"]
+[connection signal="button_down" from="YSort/VBoxContainer/TextureButton" to="YSort/VBoxContainer/TextureButton" method="_on_TextureButton_button_down"]
+[connection signal="button_up" from="YSort/VBoxContainer/TextureButton" to="YSort/VBoxContainer/TextureButton" method="_on_TextureButton_button_up"]
+[connection signal="focus_entered" from="YSort/VBoxContainer/TextureButton" to="YSort/VBoxContainer/TextureButton" method="_on_TextureButton_focus_entered"]
+[connection signal="focus_exited" from="YSort/VBoxContainer/TextureButton" to="YSort/VBoxContainer/TextureButton" method="_on_TextureButton_focus_exited"]
+[connection signal="pressed" from="YSort/VBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="button_down" from="YSort/VBoxContainer/TextureButton3" to="YSort/VBoxContainer/TextureButton3" method="_on_TextureButton_button_down"]
+[connection signal="button_up" from="YSort/VBoxContainer/TextureButton3" to="YSort/VBoxContainer/TextureButton3" method="_on_TextureButton_button_up"]
+[connection signal="focus_entered" from="YSort/VBoxContainer/TextureButton3" to="YSort/VBoxContainer/TextureButton3" method="_on_TextureButton_focus_entered"]
+[connection signal="focus_exited" from="YSort/VBoxContainer/TextureButton3" to="YSort/VBoxContainer/TextureButton3" method="_on_TextureButton_focus_exited"]
+[connection signal="pressed" from="YSort/VBoxContainer/TextureButton3" to="." method="_on_TextureButton3_pressed"]
+[connection signal="button_down" from="YSort/VBoxContainer/TextureButton2" to="YSort/VBoxContainer/TextureButton2" method="_on_TextureButton_button_down"]
+[connection signal="button_up" from="YSort/VBoxContainer/TextureButton2" to="YSort/VBoxContainer/TextureButton2" method="_on_TextureButton_button_up"]
+[connection signal="focus_entered" from="YSort/VBoxContainer/TextureButton2" to="YSort/VBoxContainer/TextureButton2" method="_on_TextureButton_focus_entered"]
+[connection signal="focus_exited" from="YSort/VBoxContainer/TextureButton2" to="YSort/VBoxContainer/TextureButton2" method="_on_TextureButton_focus_exited"]
+[connection signal="pressed" from="YSort/VBoxContainer/TextureButton2" to="." method="_on_TextureButton2_pressed"]
