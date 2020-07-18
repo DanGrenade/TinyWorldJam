@@ -36,11 +36,13 @@ func _physics_process(delta):
 		var collision_data = move_and_collide(velocity * delta)
 		#If the below triggers, we've hit the player. Bounce off of them!
 		if collision_data:
-			if collision_data.collider.has_method("hit"):
-				collision_data.collider.hit()
-				current_state = state_floating
-				velocity = velocity.bounce(collision_data.normal)
-				move_and_collide(collision_data.remainder.bounce(collision_data.normal))
+			if collision_data.normal.dot(velocity) < -0.3:
+				if collision_data.collider.has_method("hit"):
+					collision_data.collider.hit()
+					current_state = state_floating
+					velocity = -velocity
+					move_and_collide(collision_data.remainder.bounce(collision_data.normal))
+					pass
 				pass
 			pass
 		else:
