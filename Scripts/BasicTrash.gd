@@ -5,6 +5,8 @@ var game_paused = false
 var gravity_node
 var original_parent
 
+var particles = preload("res://Scenes/BoxParticles.tscn")
+
 export var grab_position = Vector2(120, -80)
 
 export var max_distance = 5000
@@ -62,6 +64,13 @@ func _physics_process(delta):
 
 func check_hit(collision_object, collision_point):
 	gravity_node.garbage_hit(collision_point)
+	
+	var particle_instance = particles.instance()
+	original_parent.add_child(particle_instance)
+	particle_instance.global_position = global_position
+	particle_instance.rotation = rotation
+	particle_instance.emitting = true
+	
 	queue_free()
 	pass
 	
