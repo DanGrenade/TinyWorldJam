@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/PlayerCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/GarbagePlanet.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Art/bg.jpg" type="Texture" id=8]
 [ext_resource path="res://Scripts/Audio.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/GameOver.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Art/ufo_damage.png" type="Texture" id=11]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource( 6 )
@@ -41,6 +42,10 @@ __meta__ = {
 [node name="Alien_Ship" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -1459.11 )
 planet_string = NodePath("../../GameManager/GarbagePlanet")
+
+[node name="ufo" parent="Alien_Ship" index="0"]
+modulate = Color( 1, 0, 0, 1 )
+texture = ExtResource( 11 )
 
 [node name="PlayerCharacter" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1.80859, -679.526 )
@@ -74,11 +79,10 @@ margin_top = -1192.31
 margin_right = -1033.18
 margin_bottom = -592.309
 rect_scale = Vector2( 4, 4 )
-[connection signal="switch_game_state_signal" from="." to="Camera2D" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="PlayerCharacter" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="Alien_Ship" method="_on_GameManager_switch_game_state_signal"]
+[connection signal="switch_game_state_signal" from="." to="Camera2D" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="GarbageSpawner" method="_on_GameManager_switch_game_state_signal"]
-[connection signal="ship_hit" from="Alien_Ship" to="Audio" method="_on_Alien_Ship_ship_hit"]
 [connection signal="ship_hit" from="Alien_Ship" to="." method="_on_Alien_Ship_ship_hit"]
 [connection signal="player_hit" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_hit"]
 [connection signal="player_hit" from="PlayerCharacter" to="Camera2D" method="_on_PlayerCharacter_player_hit"]
@@ -88,5 +92,7 @@ rect_scale = Vector2( 4, 4 )
 [connection signal="Continue_Button_Pressed" from="Start_Menu" to="." method="_on_Start_Menu_Continue_Button_Pressed"]
 [connection signal="Start_Button_Pressed" from="Start_Menu" to="." method="_on_Start_Menu_Start_Button_Pressed"]
 [connection signal="Replay_Signal" from="GameOver" to="." method="_on_GameOver_Replay_Signal"]
+
+[editable path="Alien_Ship"]
 
 [editable path="Start_Menu"]
