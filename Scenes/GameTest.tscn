@@ -36,24 +36,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GarbagePlanet" parent="." instance=ExtResource( 2 )]
+
 [node name="Alien_Ship" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -1459.11 )
 planet_string = NodePath("../../GameManager/GarbagePlanet")
 
-[node name="GarbagePlanet" parent="." instance=ExtResource( 2 )]
+[node name="PlayerCharacter" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1.80859, -679.526 )
+gravity_body_path = NodePath("../../GameManager/GarbagePlanet")
 
-[node name="GarbageSpawner" type="Node2D" parent="."]
+[node name="GarbageSpawner" type="Node" parent="."]
 script = ExtResource( 4 )
-gravity_node_path = NodePath("../GarbagePlanet")
-alien_node_path = NodePath("../Alien_Ship")
+gravity_node_path = NodePath("../../GameManager/GarbagePlanet")
+alien_node_path = NodePath("../../GameManager/Alien_Ship")
 
 [node name="Timer" type="Timer" parent="GarbageSpawner"]
 wait_time = 3.0
 autostart = true
-
-[node name="PlayerCharacter" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1.80859, -679.526 )
-gravity_body_path = NodePath("../../GameManager/GarbagePlanet")
 
 [node name="Start_Menu" parent="." instance=ExtResource( 7 )]
 margin_left = -515.181
@@ -61,34 +61,35 @@ margin_top = -295.984
 margin_right = -515.181
 margin_bottom = -295.984
 
-[node name="YSort" parent="Start_Menu" index="0"]
-position = Vector2( 0, 1 )
-
 [node name="ColorRect" parent="Start_Menu/YSort" index="0"]
 margin_left = -1533.0
 margin_top = -905.0
 margin_right = 2622.0
 margin_bottom = 1518.0
 
-[node name="GameOver" parent="." instance=ExtResource( 10 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+follow_viewport_enable = true
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource( 10 )]
 visible = false
 margin_left = -2057.18
 margin_top = -1192.31
 margin_right = -1033.18
 margin_bottom = -592.309
 rect_scale = Vector2( 4, 4 )
-[connection signal="switch_game_state_signal" from="." to="Alien_Ship" method="_on_GameManager_switch_game_state_signal"]
-[connection signal="switch_game_state_signal" from="." to="Camera2D" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="PlayerCharacter" method="_on_GameManager_switch_game_state_signal"]
+[connection signal="switch_game_state_signal" from="." to="Camera2D" method="_on_GameManager_switch_game_state_signal"]
+[connection signal="switch_game_state_signal" from="." to="Alien_Ship" method="_on_GameManager_switch_game_state_signal"]
+[connection signal="switch_game_state_signal" from="." to="GarbageSpawner" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="ship_hit" from="Alien_Ship" to="." method="_on_Alien_Ship_ship_hit"]
-[connection signal="ship_hit" from="Alien_Ship" to="Audio" method="_on_Alien_Ship_ship_hit"]
-[connection signal="timeout" from="GarbageSpawner/Timer" to="GarbageSpawner" method="_on_Timer_timeout"]
 [connection signal="player_hit" from="PlayerCharacter" to="Camera2D" method="_on_PlayerCharacter_player_hit"]
 [connection signal="player_hit" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_hit"]
 [connection signal="player_interact" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_interact"]
 [connection signal="player_jump" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_jump"]
+[connection signal="timeout" from="GarbageSpawner/Timer" to="GarbageSpawner" method="_on_Timer_timeout"]
 [connection signal="Continue_Button_Pressed" from="Start_Menu" to="." method="_on_Start_Menu_Continue_Button_Pressed"]
 [connection signal="Start_Button_Pressed" from="Start_Menu" to="." method="_on_Start_Menu_Start_Button_Pressed"]
-[connection signal="Replay_Signal" from="GameOver" to="." method="_on_GameOver_Replay_Signal"]
+[connection signal="Replay_Signal" from="CanvasLayer/GameOver" to="." method="_on_GameOver_Replay_Signal"]
 
 [editable path="Start_Menu"]
