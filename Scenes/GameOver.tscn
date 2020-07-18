@@ -24,9 +24,9 @@ __meta__ = {
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 margin_left = 32.1459
-margin_top = 335.8
+margin_top = 351.8
 margin_right = 940.146
-margin_bottom = 568.8
+margin_bottom = 584.8
 rect_scale = Vector2( 0.5, 0.5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -81,8 +81,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="button_down" from="HSplitContainer/TextureButton" to="HSplitContainer/TextureButton" method="_on_TextureButton_button_down"]
-[connection signal="button_up" from="HSplitContainer/TextureButton" to="HSplitContainer/TextureButton" method="_on_TextureButton_button_up"]
 [connection signal="button_up" from="HSplitContainer/TextureButton" to="." method="_on_TextureButton_button_up"]
+[connection signal="button_up" from="HSplitContainer/TextureButton" to="HSplitContainer/TextureButton" method="_on_TextureButton_button_up"]
 [connection signal="focus_entered" from="HSplitContainer/TextureButton" to="HSplitContainer/TextureButton" method="_on_TextureButton_focus_entered"]
 [connection signal="focus_exited" from="HSplitContainer/TextureButton" to="HSplitContainer/TextureButton" method="_on_TextureButton_focus_exited"]
 [connection signal="button_down" from="HSplitContainer/TextureButton2" to="HSplitContainer/TextureButton2" method="_on_TextureButton_button_down"]

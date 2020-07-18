@@ -11,24 +11,28 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_pressed("pause_game"):
+		print(current_state)
 		if current_state == state_playing:
 			stop_game()
 			$Start_Menu.visible = true
 			pass
 		elif current_state == state_escape:
 			continue_game()
+
 			pass
 		pass
 	pass
 
 func stop_game():
 	emit_signal("switch_game_state_signal", true)
+
 	pass
 
 func continue_game():
 	emit_signal("switch_game_state_signal", false)
 	$Audio.play_confirm_sfx()
-	pass
+
+
 
 
 func _on_Start_Menu_Start_Button_Pressed():
@@ -46,6 +50,7 @@ func game_over():
 	stop_game()
 	$GameOver.visible = true
 	$GameOver.give_focus()
+	$Audio.play_menu_bg()
 	pass
 
 

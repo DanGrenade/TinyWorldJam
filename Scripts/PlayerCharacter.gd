@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+enum {RUN, IDLE, HIT, HOLD_IDLE, HOLD_RUN, DROP}
+var current_anim = IDLE
 
 var game_stopped = false
 
@@ -45,6 +47,7 @@ func _process(delta):
 	if grounded:
 		# Jump
 		if Input.is_action_just_pressed("jump"):
+			emit_signal("player_jump")
 			velocity.y = jumpVelocity
 			grounded = false
 			pass
@@ -78,6 +81,7 @@ func _process(delta):
 		pass
 	
 	if Input.is_action_just_pressed("box_grab"):
+
 		emit_signal("player_interact")
 		if holding && holding_trash == false:
 			if $BombPlace.get_child_count() == 0:
@@ -94,9 +98,10 @@ func _process(delta):
 				
 				pass
 			elif gravity_body.Check_Grab(rotation + (2 * PI / 12)):
-				$trash_placeholder2.visible = true
+				#$trash_placeholder2.visible = true
 				holding = true
 				holding_trash = true
+				
 				pass
 			pass
 		else:
@@ -106,12 +111,15 @@ func _process(delta):
 				pass
 			else:
 				gravity_body.drop_trash(rotation + (2 * PI / 12))
-				$trash_placeholder2.visible = false
+				#$trash_placeholder2.visible = false
 				holding = false
+				holding_trash = false
+				current_anim = DROP
+				play_anim()
 				pass
 	
 	#Flip sprite based on movement direction
-	if velocity.x > 0.05:
+	if velocity.x > 0.05 && current_anim != HIT:
 		if $Sprite.flip_h == true:
 			$Sprite.flip_h = false
 			$trash_placeholder2.position.x *= -1
@@ -119,7 +127,7 @@ func _process(delta):
 			$BombPlace.position.x *= -1
 			pass
 		pass
-	elif velocity.x < -0.05:
+	elif velocity.x < -0.05 && current_anim != HIT:
 		if $Sprite.flip_h != true:
 			$Sprite.flip_h = true
 			$trash_placeholder2.position.x *= -1
@@ -129,13 +137,21 @@ func _process(delta):
 		
 	#Change animation based on state
 	#Note: May want to shift this control to a separate node if animation becomes more complex
-	if abs(velocity.x) > 0.1:
-		$Sprite/AnimationPlayer.play("Run")
-		pass
-	else:
-		$Sprite/AnimationPlayer.play("Stationary")
-		pass
-	
+	if current_anim != HIT and current_anim != DROP:
+		if abs(velocity.x) > 0.1:
+			if holding_trash == true:
+				current_anim = HOLD_RUN
+			elif holding_trash == false:
+				current_anim = RUN
+			pass
+		else:
+			if holding_trash == true: 
+				current_anim = HOLD_IDLE
+			elif holding_trash == false:
+				current_anim = IDLE
+			pass
+		
+	play_anim()
 		
 	pass
 
@@ -151,7 +167,7 @@ func _physics_process(delta):
 		# Otherwise, apply gravity
 		else:
 			velocity.y -= gravity
-			#emit_signal("player_jump")
+
 			pass
 	else:
 		if !$RayCast2D_Left.is_colliding() and !$RayCast2D_Right.is_colliding():
@@ -172,6 +188,8 @@ func hit():
 		pass
 	
 	emit_signal("player_hit")
+	current_anim = HIT
+	play_anim()
 	
 	pass 
 
@@ -179,3 +197,25 @@ func hit():
 func _on_GameManager_switch_game_state_signal(pause_state):
 	game_stopped = pause_state
 	pass
+
+func play_anim():
+	print(current_anim)
+	match current_anim:
+		IDLE:
+			$Sprite/AnimationPlayer.play("Stationary")
+		HOLD_IDLE:
+			$Sprite/AnimationPlayer.play("Hold_Stationery")
+		HOLD_RUN:
+			$Sprite/AnimationPlayer.play("Hold_Run")
+		RUN:
+			$Sprite/AnimationPlayer.play("Run")
+		DROP:
+			velocity = Vector2.ZERO
+			$Sprite/AnimationPlayer.play("Drop_Trash")
+			yield($Sprite/AnimationPlayer, "animation_finished")
+			current_anim = IDLE
+		HIT: 
+			velocity = Vector2.ZERO
+			$Sprite/AnimationPlayer.play("Hit")
+			yield($Sprite/AnimationPlayer, "animation_finished")
+			current_anim = IDLE

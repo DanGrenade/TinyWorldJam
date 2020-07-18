@@ -9,6 +9,7 @@ onready var jump = load("res://Audio/sfx_movement_jump8.wav")
 onready var confirm = load("res://Audio/sfx_menu_move2.wav")
 onready var interact_trash = load("res://Audio/sfx_sounds_interaction22.wav")
 onready var explosion = load("res://Audio/sfx_exp_short_hard3.wav")
+onready var hit = load("res://Audio/sfx_sounds_impact4.wav")
 
 func _ready():
 	self.add_child(sfx)
@@ -30,7 +31,7 @@ func play_confirm_sfx():
 	sfx.play()
 
 func _on_PlayerCharacter_player_hit() -> void:
-	sfx.stream = explosion
+	sfx.stream = hit
 	sfx.play()
 
 func _on_PlayerCharacter_player_jump() -> void:
@@ -39,4 +40,8 @@ func _on_PlayerCharacter_player_jump() -> void:
 
 func _on_PlayerCharacter_player_interact() -> void:
 	sfx.stream = interact_trash
+	sfx.play()
+
+func _on_Alien_Ship_ship_hit() -> void:
+	sfx.stream = explosion
 	sfx.play()
