@@ -1,8 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Art/UI/button_large.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/TextureButton.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Start_Menu.gd" type="Script" id=3]
+[ext_resource path="res://font/kirbyss.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=4]
+size = 80
+extra_spacing_char = 10
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 100
+extra_spacing_char = 14
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://font/kirbyss.ttf"
@@ -23,6 +34,45 @@ __meta__ = {
 [node name="YSort" type="YSort" parent="."]
 z_index = 1
 
+[node name="Controls" type="Label" parent="YSort"]
+margin_left = 64.0
+margin_top = 2474.01
+margin_right = 2218.0
+margin_bottom = 3118.01
+custom_fonts/font = SubResource( 4 )
+text = "Direction/WASD keys to move. Space/Up to jump. E/Z to pick up or drop. ESC to pause"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartContent" type="Control" parent="YSort"]
+margin_top = 911.0
+margin_right = 2666.0
+margin_bottom = 3292.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Instructions" type="Label" parent="YSort/StartContent"]
+margin_left = 75.0
+margin_top = 285.0
+margin_right = 2005.0
+margin_bottom = 1393.0
+size_flags_horizontal = 2
+custom_fonts/font = SubResource( 3 )
+text = "Welcome to your life on a junkyard planet! 
+
+Keep falling space trash from piling up by destroying them with bombs. 
+
+If trash piles too high, you might endanger your alien buddy so watch out!"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ColorRect" type="ColorRect" parent="YSort"]
 modulate = Color( 1, 1, 1, 0.411765 )
 margin_right = 1028.0
@@ -30,6 +80,7 @@ margin_bottom = 600.0
 mouse_filter = 1
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
