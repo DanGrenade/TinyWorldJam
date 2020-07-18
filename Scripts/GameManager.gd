@@ -11,7 +11,6 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_pressed("pause_game"):
-		print(current_state)
 		if current_state == state_playing:
 			stop_game()
 			$Start_Menu.visible = true

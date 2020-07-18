@@ -27,9 +27,9 @@ player_follow_path = NodePath("../../GameManager/PlayerCharacter")
 
 [node name="TextureRect" type="TextureRect" parent="Camera2D"]
 margin_left = -2898.0
-margin_top = -1483.0
+margin_top = -1510.0
 margin_right = 2565.0
-margin_bottom = 1700.0
+margin_bottom = 1681.0
 texture = ExtResource( 8 )
 expand = true
 __meta__ = {
@@ -64,7 +64,19 @@ margin_bottom = -295.984
 [node name="YSort" parent="Start_Menu" index="0"]
 position = Vector2( 0, 1 )
 
-[node name="ColorRect" parent="Start_Menu/YSort" index="0"]
+[node name="Controls" parent="Start_Menu/YSort" index="0"]
+margin_left = -2067.21
+margin_top = 1665.52
+margin_right = 3006.79
+margin_bottom = 2309.52
+
+[node name="Instructions" parent="Start_Menu/YSort/StartContent" index="0"]
+margin_left = -1830.73
+margin_top = -259.945
+margin_right = 2828.27
+margin_bottom = 848.055
+
+[node name="ColorRect" parent="Start_Menu/YSort" index="2"]
 margin_left = -2437.0
 margin_top = -1205.0
 margin_right = 3115.0
@@ -84,8 +96,8 @@ rect_scale = Vector2( 5, 5 )
 [connection signal="ship_hit" from="Alien_Ship" to="." method="_on_Alien_Ship_ship_hit"]
 [connection signal="ship_hit" from="Alien_Ship" to="Audio" method="_on_Alien_Ship_ship_hit"]
 [connection signal="timeout" from="GarbageSpawner/Timer" to="GarbageSpawner" method="_on_Timer_timeout"]
-[connection signal="player_hit" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_hit"]
 [connection signal="player_hit" from="PlayerCharacter" to="Camera2D" method="_on_PlayerCharacter_player_hit"]
+[connection signal="player_hit" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_hit"]
 [connection signal="player_interact" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_interact"]
 [connection signal="player_jump" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_jump"]
 [connection signal="Continue_Button_Pressed" from="Start_Menu" to="." method="_on_Start_Menu_Continue_Button_Pressed"]
