@@ -13,6 +13,7 @@ func _process(delta):
 	if Input.is_action_pressed("pause_game"):
 		if current_state == state_playing:
 			stop_game()
+			$Start_Menu.visible = true
 			pass
 		elif current_state == state_escape:
 			continue_game()
@@ -26,7 +27,6 @@ func stop_game():
 
 func continue_game():
 	emit_signal("switch_game_state_signal", false)
-	$Audio.play_game_bg()
 	$Audio.play_confirm_sfx()
 	pass
 

@@ -14,13 +14,6 @@
 [node name="GameManager" type="Node2D"]
 script = ExtResource( 6 )
 
-[node name="GameOver" parent="." instance=ExtResource( 10 )]
-margin_left = -2057.18
-margin_top = -1192.31
-margin_right = -1033.18
-margin_bottom = -592.309
-rect_scale = Vector2( 4, 4 )
-
 [node name="Audio" type="Node" parent="."]
 script = ExtResource( 9 )
 
@@ -73,11 +66,19 @@ margin_left = -1533.0
 margin_top = -905.0
 margin_right = 2622.0
 margin_bottom = 1518.0
-[connection signal="switch_game_state_signal" from="." to="Start_Menu" method="_on_GameManager_switch_game_state_signal"]
+
+[node name="GameOver" parent="." instance=ExtResource( 10 )]
+visible = false
+margin_left = -2057.18
+margin_top = -1192.31
+margin_right = -1033.18
+margin_bottom = -592.309
+rect_scale = Vector2( 4, 4 )
 [connection signal="switch_game_state_signal" from="." to="Camera2D" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="Alien_Ship" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="PlayerCharacter" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="GarbageSpawner" method="_on_GameManager_switch_game_state_signal"]
+[connection signal="ship_hit" from="Alien_Ship" to="." method="_on_Alien_Ship_ship_hit"]
 [connection signal="player_hit" from="PlayerCharacter" to="Camera2D" method="_on_PlayerCharacter_player_hit"]
 [connection signal="player_hit" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_hit"]
 [connection signal="player_interact" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_interact"]
@@ -85,5 +86,6 @@ margin_bottom = 1518.0
 [connection signal="timeout" from="GarbageSpawner/Timer" to="GarbageSpawner" method="_on_Timer_timeout"]
 [connection signal="Continue_Button_Pressed" from="Start_Menu" to="." method="_on_Start_Menu_Continue_Button_Pressed"]
 [connection signal="Start_Button_Pressed" from="Start_Menu" to="." method="_on_Start_Menu_Start_Button_Pressed"]
+[connection signal="Replay_Signal" from="GameOver" to="." method="_on_GameOver_Replay_Signal"]
 
 [editable path="Start_Menu"]

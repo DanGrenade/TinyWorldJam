@@ -22,7 +22,7 @@ func _on_TextureButton_pressed():
 #Continue Button Pressed
 func _on_TextureButton3_pressed():
 	emit_signal("Continue_Button_Pressed")
-	
+	visible = false
 	pass 
 
 
@@ -34,7 +34,6 @@ func _on_TextureButton2_pressed():
 
 
 func _on_GameManager_switch_game_state_signal(pause_state):
-	if visible && pause_state: return
 	
-	visible = pause_state	
+	visible = pause_state
 	pass
