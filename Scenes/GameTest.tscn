@@ -21,15 +21,15 @@ script = ExtResource( 9 )
 position = Vector2( -2, 0 )
 rotating = true
 current = true
-zoom = Vector2( 4, 4 )
+zoom = Vector2( 5, 5 )
 script = ExtResource( 3 )
 player_follow_path = NodePath("../../GameManager/PlayerCharacter")
 
 [node name="TextureRect" type="TextureRect" parent="Camera2D"]
-margin_left = -2055.0
-margin_top = -1195.0
-margin_right = 2071.0
-margin_bottom = 1209.0
+margin_left = -2898.0
+margin_top = -1483.0
+margin_right = 2565.0
+margin_bottom = 1700.0
 texture = ExtResource( 8 )
 expand = true
 __meta__ = {
@@ -65,10 +65,10 @@ margin_bottom = -295.984
 position = Vector2( 0, 1 )
 
 [node name="ColorRect" parent="Start_Menu/YSort" index="0"]
-margin_left = -1533.0
-margin_top = -905.0
-margin_right = 2622.0
-margin_bottom = 1518.0
+margin_left = -2437.0
+margin_top = -1205.0
+margin_right = 3115.0
+margin_bottom = 2034.0
 
 [node name="GameOver" parent="." instance=ExtResource( 10 )]
 visible = false
@@ -77,6 +77,7 @@ margin_top = -1192.31
 margin_right = -1033.18
 margin_bottom = -592.309
 rect_scale = Vector2( 4, 4 )
+[connection signal="switch_game_state_signal" from="." to="GarbageSpawner" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="Alien_Ship" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="Camera2D" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="PlayerCharacter" method="_on_GameManager_switch_game_state_signal"]
