@@ -27,9 +27,9 @@ player_follow_path = NodePath("../../GameManager/PlayerCharacter")
 
 [node name="TextureRect" type="TextureRect" parent="Camera2D"]
 margin_left = -2898.0
-margin_top = -1483.0
+margin_top = -1510.0
 margin_right = 2565.0
-margin_bottom = 1700.0
+margin_bottom = 1681.0
 texture = ExtResource( 8 )
 expand = true
 __meta__ = {
@@ -64,7 +64,19 @@ margin_bottom = -295.984
 [node name="YSort" parent="Start_Menu" index="0"]
 position = Vector2( 0, 1 )
 
-[node name="ColorRect" parent="Start_Menu/YSort" index="0"]
+[node name="Controls" parent="Start_Menu/YSort" index="0"]
+margin_left = -2067.21
+margin_top = 1665.52
+margin_right = 3006.79
+margin_bottom = 2309.52
+
+[node name="Instructions" parent="Start_Menu/YSort/StartContent" index="0"]
+margin_left = -1830.73
+margin_top = -259.945
+margin_right = 2828.27
+margin_bottom = 848.055
+
+[node name="ColorRect" parent="Start_Menu/YSort" index="2"]
 margin_left = -2437.0
 margin_top = -1205.0
 margin_right = 3115.0
@@ -77,9 +89,9 @@ margin_top = -1486.0
 margin_right = -1621.0
 margin_bottom = -885.0
 rect_scale = Vector2( 5, 5 )
-[connection signal="switch_game_state_signal" from="." to="GarbageSpawner" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="Camera2D" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="Alien_Ship" method="_on_GameManager_switch_game_state_signal"]
+[connection signal="switch_game_state_signal" from="." to="GarbageSpawner" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="PlayerCharacter" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="ship_hit" from="Alien_Ship" to="." method="_on_Alien_Ship_ship_hit"]
 [connection signal="ship_hit" from="Alien_Ship" to="Audio" method="_on_Alien_Ship_ship_hit"]
