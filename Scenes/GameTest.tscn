@@ -72,15 +72,15 @@ margin_bottom = 2034.0
 
 [node name="GameOver" parent="." instance=ExtResource( 10 )]
 visible = false
-margin_left = -2057.18
-margin_top = -1192.31
-margin_right = -1033.18
-margin_bottom = -592.309
-rect_scale = Vector2( 4, 4 )
+margin_left = -2645.0
+margin_top = -1486.0
+margin_right = -1621.0
+margin_bottom = -885.0
+rect_scale = Vector2( 5, 5 )
 [connection signal="switch_game_state_signal" from="." to="GarbageSpawner" method="_on_GameManager_switch_game_state_signal"]
+[connection signal="switch_game_state_signal" from="." to="PlayerCharacter" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="Alien_Ship" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="Camera2D" method="_on_GameManager_switch_game_state_signal"]
-[connection signal="switch_game_state_signal" from="." to="PlayerCharacter" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="ship_hit" from="Alien_Ship" to="." method="_on_Alien_Ship_ship_hit"]
 [connection signal="ship_hit" from="Alien_Ship" to="Audio" method="_on_Alien_Ship_ship_hit"]
 [connection signal="timeout" from="GarbageSpawner/Timer" to="GarbageSpawner" method="_on_Timer_timeout"]
