@@ -15,6 +15,7 @@ export var planet_string = NodePath()
 var planet_node
 
 func _ready():
+	$AnimationPlayer.play("Patrol")
 	planet_node = get_node(planet_string)
 	
 	velocity.x = ship_speed

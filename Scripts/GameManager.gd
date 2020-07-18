@@ -56,6 +56,13 @@ func game_over():
 
 
 func _on_Alien_Ship_ship_hit():
+	$Camera2D.shaking = true
+	$Camera2D.current_shake = $Camera2D.max_shake
+	$Camera2D.do_shake()
+	$Alien_Ship/CollisionShape2D.disabled = true
+	$Audio.play_explosion_sfx()
+	$Alien_Ship/AnimationPlayer.play("Damaged")
+	yield($Alien_Ship/AnimationPlayer, "animation_finished")
 	game_over()
 	pass
 

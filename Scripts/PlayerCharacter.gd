@@ -108,6 +108,8 @@ func _process(delta):
 			if holding_trash == false:
 				$BombPlace.get_child(0).place(global_position)
 				holding = false
+				current_anim = DROP
+				play_anim()
 				pass
 			else:
 				gravity_body.drop_trash(rotation + (2 * PI / 12))
@@ -199,7 +201,6 @@ func _on_GameManager_switch_game_state_signal(pause_state):
 	pass
 
 func play_anim():
-	print(current_anim)
 	match current_anim:
 		IDLE:
 			$Sprite/AnimationPlayer.play("Stationary")

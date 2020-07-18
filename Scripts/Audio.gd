@@ -30,6 +30,10 @@ func play_confirm_sfx():
 	sfx.stream = confirm
 	sfx.play()
 
+func play_explosion_sfx():
+	sfx.stream = explosion
+	sfx.play()
+
 func _on_PlayerCharacter_player_hit() -> void:
 	sfx.stream = hit
 	sfx.play()
@@ -42,6 +46,3 @@ func _on_PlayerCharacter_player_interact() -> void:
 	sfx.stream = interact_trash
 	sfx.play()
 
-func _on_Alien_Ship_ship_hit() -> void:
-	sfx.stream = explosion
-	sfx.play()

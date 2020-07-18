@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Art/Player/separated frames/idle/player_idle_frame1.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/PlayerCharacter.gd" type="Script" id=2]
@@ -10,17 +10,16 @@
 [ext_resource path="res://Art/Player/separated frames/running/player_run_frame3.png" type="Texture" id=8]
 [ext_resource path="res://Art/Player/separated frames/running/player_run_frame2.png" type="Texture" id=9]
 [ext_resource path="res://Art/Player/separated frames/hit/player_hit.png" type="Texture" id=10]
-[ext_resource path="res://Art/Player/separated frames/drop item (with trash)/player_drop_frame1.png" type="Texture" id=11]
-[ext_resource path="res://Art/Player/separated frames/drop item (with trash)/player_drop_frame2.png" type="Texture" id=12]
+[ext_resource path="res://Art/Player/separated frames/drop item (empty hand)/player_drop_frame2.png" type="Texture" id=11]
 [ext_resource path="res://Art/Player/separated frames/hold (with trash)/running/player_hold_run_frame1.png" type="Texture" id=13]
 [ext_resource path="res://Art/Player/separated frames/hold (with trash)/running/player_hold_run_frame3.png" type="Texture" id=14]
 [ext_resource path="res://Art/Player/separated frames/hold (with trash)/running/player_hold_run_frame2.png" type="Texture" id=15]
 [ext_resource path="res://Art/Player/separated frames/hold (with trash)/idle/player_hold_idle_frame2.png" type="Texture" id=16]
 [ext_resource path="res://Art/Player/separated frames/hold (with trash)/idle/player_hold_idle_frame1.png" type="Texture" id=17]
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=1]
 resource_name = "Drop_Trash"
-step = 0.5
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
@@ -28,13 +27,37 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 11 ) ]
+"values": [ ExtResource( 11 ), ExtResource( 11 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 13.4666, -21.3782 ), Vector2( 12.2775, -2.74852 ), Vector2( 13.4666, -21.3782 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.07432, 0.898198 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=2]
 resource_name = "Hit"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
@@ -49,7 +72,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 10 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=3]
 resource_name = "Hold_Run"
 length = 0.6
 loop = true
@@ -67,7 +90,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 13 ), ExtResource( 15 ), ExtResource( 14 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=4]
 resource_name = "Hold_Stationery"
 loop = true
 step = 0.5
@@ -139,10 +162,10 @@ flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 method_call_mode = 1
-anims/Drop_Trash = SubResource( 9 )
-anims/Hit = SubResource( 10 )
-anims/Hold_Run = SubResource( 11 )
-anims/Hold_Stationery = SubResource( 12 )
+anims/Drop_Trash = SubResource( 1 )
+anims/Hit = SubResource( 2 )
+anims/Hold_Run = SubResource( 3 )
+anims/Hold_Stationery = SubResource( 4 )
 anims/Run = SubResource( 5 )
 anims/Stationary = SubResource( 6 )
 
