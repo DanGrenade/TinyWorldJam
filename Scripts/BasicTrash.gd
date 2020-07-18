@@ -22,10 +22,10 @@ func spawn(target, location):
 	gravity_node = target
 	
 	velocity = (gravity_node.global_position - global_position).normalized() * fall_speed
-	global_rotation = (position - gravity_node.global_position).angle() + (PI/2)
+	global_rotation = (global_position - gravity_node.global_position).angle() + (PI/2)
 	
 	original_parent = get_parent()
-	original_parent.connect("switch_game_state_signal", self, "_on_GameManager_switch_game_state_signal")
+	original_parent.get_parent().connect("switch_game_state_signal", self, "_on_GameManager_switch_game_state_signal")
 	pass
 
 func _physics_process(delta):

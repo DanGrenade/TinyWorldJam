@@ -2,6 +2,10 @@ extends TextureRect
 
 signal Replay_Signal
 
+func _ready():
+	
+	pass
+
 func give_focus():
 	$HSplitContainer/TextureButton.grab_focus()
 	pass

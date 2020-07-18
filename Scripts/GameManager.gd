@@ -48,8 +48,9 @@ func _on_Start_Menu_Continue_Button_Pressed():
 
 func game_over():
 	stop_game()
-	$CanvasLayer/GameOver.visible = true
-	$CanvasLayer/GameOver.give_focus()
+	$GarbageSpawner.visible = false
+	$GameOver.visible = true
+	$GameOver.give_focus()
 	
 	$Audio.play_menu_bg()
 	pass

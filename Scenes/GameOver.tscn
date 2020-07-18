@@ -28,6 +28,7 @@ margin_top = 351.8
 margin_right = 940.146
 margin_bottom = 584.8
 rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -49,6 +50,7 @@ margin_left = 51.0
 margin_top = 50.0
 margin_right = 387.0
 margin_bottom = 186.0
+mouse_filter = 2
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Try Again[/center]"
@@ -73,6 +75,7 @@ margin_left = 60.3496
 margin_top = 82.3008
 margin_right = 396.35
 margin_bottom = 164.301
+mouse_filter = 2
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Quit[/center]"
