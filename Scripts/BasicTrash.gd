@@ -32,18 +32,14 @@ func _physics_process(delta):
 	if game_paused: return
 	
 	if current_state == state_falling:
-		
+		velocity = (gravity_node.global_position - global_position).normalized() * fall_speed
 		var collision_data = move_and_collide(velocity * delta)
 		#If the below triggers, we've hit the player. Bounce off of them!
-		if collision_data:
-			if collision_data.normal.dot(velocity) < -0.3:
-				if collision_data.collider.has_method("hit"):
-					collision_data.collider.hit()
-					current_state = state_floating
-					velocity = -velocity
-					move_and_collide(collision_data.remainder.bounce(collision_data.normal))
-					pass
-				pass
+		if collision_data && collision_data.normal.dot(velocity) < -0.3 && collision_data.collider.has_method("hit"):
+			collision_data.collider.hit()
+			current_state = state_floating
+			velocity = -velocity
+			move_and_collide(collision_data.remainder.bounce(collision_data.normal))
 			pass
 		else:
 			if $RayCast2D_Left.is_colliding():

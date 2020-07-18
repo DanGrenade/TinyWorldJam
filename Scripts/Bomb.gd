@@ -20,23 +20,28 @@ func initialize(planet_node, alien_node):
 	parent_node = get_parent()
 	parent_node.get_parent().connect("switch_game_state_signal", self, "_on_GameManager_switch_game_state_signal")
 	
+	
 	drop_bomb()
 	pass
 
 func drop_bomb():
 	
 	$bomb/AnimationPlayer.play("Idle")
-	global_position = alien.global_position
+	global_position = alien.global_position	
 	current_state = state_falling
 	if state_held:
 		get_parent().remove_child(self)
 		parent_node.add_child(self)
 		pass
 	
+	global_rotation = (global_position - gravity_node.global_position).angle() + (PI/2)
 	pass
 
 func _physics_process(delta):
 	if game_paused: return
+	
+	
+	if current_state == state_held:  global_rotation = (global_position - gravity_node.global_position).angle() + (PI/2)
 	
 	if current_state == state_falling:
 		velocity = (gravity_node.global_position - global_position).normalized() * drop_velocity
