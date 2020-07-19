@@ -73,35 +73,31 @@ margin_right = 3115.0
 margin_bottom = 2034.0
 
 [node name="Controls" parent="Start_Menu/YSort" index="2"]
-margin_left = -960.908
-margin_top = 1013.0
-margin_right = 102.092
-margin_bottom = 1243.0
+margin_left = -961.0
+margin_top = 884.0
+margin_right = 102.0
+margin_bottom = 1167.0
 rect_scale = Vector2( 3, 3 )
 
-[node name="Graphics" parent="Start_Menu/YSort/Controls" index="0"]
+[node name="VBoxContainer" parent="Start_Menu/YSort/Controls" index="0"]
 margin_right = 1063.0
-margin_bottom = 230.0
+margin_bottom = 283.0
 
-[node name="Move" parent="Start_Menu/YSort/Controls/Graphics" index="0"]
-margin_bottom = 230.0
+[node name="Label" parent="Start_Menu/YSort/Controls/VBoxContainer" index="0"]
+margin_right = 1063.0
 
-[node name="Jump" parent="Start_Menu/YSort/Controls/Graphics" index="1"]
+[node name="Graphics" parent="Start_Menu/YSort/Controls/VBoxContainer" index="1"]
+margin_top = 70.0
+margin_right = 1063.0
+margin_bottom = 283.0
+
+[node name="Jump" parent="Start_Menu/YSort/Controls/VBoxContainer/Graphics" index="1"]
 margin_left = 267.0
 margin_right = 624.0
-margin_bottom = 230.0
 
-[node name="Interact" parent="Start_Menu/YSort/Controls/Graphics" index="2"]
+[node name="Interact" parent="Start_Menu/YSort/Controls/VBoxContainer/Graphics" index="2"]
 margin_left = 628.0
 margin_right = 1063.0
-margin_bottom = 230.0
-
-[node name="InteractImg" parent="Start_Menu/YSort/Controls/Graphics/Interact" index="0"]
-margin_bottom = 113.0
-
-[node name="InteractLabel" parent="Start_Menu/YSort/Controls/Graphics/Interact" index="1"]
-margin_top = 117.0
-margin_bottom = 230.0
 
 [node name="GameOver" parent="." instance=ExtResource( 10 )]
 visible = false
@@ -124,10 +120,10 @@ script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="switch_game_state_signal" from="." to="Alien_Ship" method="_on_GameManager_switch_game_state_signal"]
-[connection signal="switch_game_state_signal" from="." to="Camera2D" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="GarbageSpawner" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="PlayerCharacter" method="_on_GameManager_switch_game_state_signal"]
+[connection signal="switch_game_state_signal" from="." to="Camera2D" method="_on_GameManager_switch_game_state_signal"]
+[connection signal="switch_game_state_signal" from="." to="Alien_Ship" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="ship_hit" from="Alien_Ship" to="." method="_on_Alien_Ship_ship_hit"]
 [connection signal="timeout" from="GarbageSpawner/Timer" to="GarbageSpawner" method="_on_Timer_timeout"]
 [connection signal="player_hit" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_hit"]
