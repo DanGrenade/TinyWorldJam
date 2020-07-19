@@ -16,6 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="TinyWorldJam"
+run/main_scene="res://Scenes/GameTest.tscn"
+config/icon="res://icon.png"
 
 [display]
 
