@@ -25,7 +25,6 @@ func initialize(planet_node, alien_node):
 	pass
 
 func drop_bomb():
-	
 	$bomb/AnimationPlayer.play("Idle")
 	global_position = alien.global_position	
 	current_state = state_falling
@@ -69,7 +68,7 @@ func pickup(placement_node):
 func place(position):
 	
 	current_state = state_stationary
-	
+	$bomb/AnimationPlayer.play("Idle")
 	get_parent().remove_child(self)
 	parent_node.add_child(self)
 	
@@ -80,8 +79,11 @@ func place(position):
 
 func _on_ExplosionTimer_timeout():
 	gravity_node.explode(position)
+	$bomb/AnimationPlayer.play("Explode")
+	yield($bomb/AnimationPlayer, "animation_finished")
 	drop_bomb()
 	$AudioStreamPlayer2D.play()
+
 	
 	pass
 	

@@ -67,10 +67,14 @@ margin_bottom = -295.984
 position = Vector2( 0, 1 )
 
 [node name="Controls" parent="Start_Menu/YSort" index="0"]
+visible = false
 margin_left = -2067.21
 margin_top = 1665.52
 margin_right = 3006.79
 margin_bottom = 2309.52
+
+[node name="StartContent" parent="Start_Menu/YSort" index="1"]
+visible = false
 
 [node name="Instructions" parent="Start_Menu/YSort/StartContent" index="0"]
 margin_left = -1830.73
@@ -105,12 +109,11 @@ script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="switch_game_state_signal" from="." to="GarbageSpawner" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="Camera2D" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="Alien_Ship" method="_on_GameManager_switch_game_state_signal"]
+[connection signal="switch_game_state_signal" from="." to="GarbageSpawner" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="switch_game_state_signal" from="." to="PlayerCharacter" method="_on_GameManager_switch_game_state_signal"]
 [connection signal="ship_hit" from="Alien_Ship" to="." method="_on_Alien_Ship_ship_hit"]
-[connection signal="ship_hit" from="Alien_Ship" to="Audio" method="_on_Alien_Ship_ship_hit"]
 [connection signal="timeout" from="GarbageSpawner/Timer" to="GarbageSpawner" method="_on_Timer_timeout"]
 [connection signal="player_hit" from="PlayerCharacter" to="Audio" method="_on_PlayerCharacter_player_hit"]
 [connection signal="player_hit" from="PlayerCharacter" to="Camera2D" method="_on_PlayerCharacter_player_hit"]
