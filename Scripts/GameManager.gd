@@ -2,7 +2,9 @@ extends Node2D
 
 signal switch_game_state_signal(pause_state)
 
-enum {state_start, state_playing, state_escape, state_fail}
+var game_time = 0
+
+enum {state_start, state_playing, state_pause, state_fail}
 var current_state = state_start
 
 func _ready():
@@ -10,14 +12,21 @@ func _ready():
 	pass
 
 func _process(delta):
-	if Input.is_action_pressed("pause_game"):
+	if current_state == state_playing:
+		game_time += delta
+		$Game_Time.update_time(game_time)
+		pass
+	
+	if Input.is_action_just_pressed("pause_game"):
 		if current_state == state_playing:
 			stop_game()
+			current_state = state_pause
 			$Start_Menu.visible = true
 			pass
-		elif current_state == state_escape:
+		elif current_state == state_pause:
 			continue_game()
-
+			$Start_Menu.visible = false
+			current_state = state_playing
 			pass
 		pass
 	pass
@@ -30,9 +39,7 @@ func stop_game():
 func continue_game():
 	emit_signal("switch_game_state_signal", false)
 	$Audio.play_confirm_sfx()
-
-
-
+	pass
 
 func _on_Start_Menu_Start_Button_Pressed():
 	current_state = state_playing
@@ -47,6 +54,7 @@ func _on_Start_Menu_Continue_Button_Pressed():
 
 func game_over():
 	stop_game()
+	current_state = state_fail
 	$GarbageSpawner.visible = false
 	$GameOver.visible = true
 	$GameOver.give_focus()

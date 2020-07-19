@@ -5,22 +5,22 @@
 [ext_resource path="res://Scripts/Start_Menu.gd" type="Script" id=3]
 [ext_resource path="res://font/kirbyss.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 size = 80
 extra_spacing_char = 10
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 100
 extra_spacing_char = 14
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="DynamicFontData" id=3]
 font_path = "res://font/kirbyss.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 size = 90
-font_data = SubResource( 1 )
+font_data = SubResource( 3 )
 
 [node name="Start_Menu" type="Control"]
 anchor_right = 1.0
@@ -39,7 +39,7 @@ margin_left = 64.0
 margin_top = 2474.01
 margin_right = 2218.0
 margin_bottom = 3118.01
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 text = "Direction/WASD keys to move. Space/Up to jump. E/Z to pick up or drop. ESC to pause"
 align = 1
 autowrap = true
@@ -61,7 +61,7 @@ margin_top = 285.0
 margin_right = 2005.0
 margin_bottom = 1393.0
 size_flags_horizontal = 2
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Welcome to your life on a junkyard planet! 
 
 Keep falling space trash from piling up by destroying them with bombs. 
@@ -124,7 +124,7 @@ margin_top = 79.0
 margin_right = -52.0
 margin_bottom = -74.0
 mouse_filter = 1
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 4 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.647059, 0.67451, 0.737255, 1 )
 bbcode_enabled = true
@@ -162,7 +162,7 @@ margin_top = 73.3848
 margin_right = -33.8284
 margin_bottom = -79.6152
 mouse_filter = 1
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 4 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.647059, 0.67451, 0.737255, 1 )
 bbcode_enabled = true
@@ -192,7 +192,7 @@ margin_top = 82.0
 margin_right = -55.0
 margin_bottom = -71.0
 mouse_filter = 1
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 4 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0.647059, 0.67451, 0.737255, 1 )
 bbcode_enabled = true
