@@ -181,7 +181,7 @@ margin_bottom = 565.0
 margin_right = 2927.0
 margin_bottom = 36.0
 custom_fonts/font = SubResource( 3 )
-text = "Don't let the alien crash!"
+text = "Help your alien friend avoid the trash piles!"
 align = 1
 autowrap = true
 
