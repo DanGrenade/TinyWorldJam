@@ -43,11 +43,11 @@ func _physics_process(delta):
 	
 	if current_state == state_held:  global_rotation = (global_position - gravity_node.global_position).angle() + (PI/2)
 	
-	if current_state == state_falling:
-		velocity = (gravity_node.global_position - global_position).normalized() * drop_velocity
-		
+	velocity = (gravity_node.global_position - global_position).normalized() * drop_velocity
+	
+	if current_state != state_held:
 		var collision_data = move_and_collide(velocity)
-		if collision_data:
+		if current_state == state_falling && collision_data:
 			current_state = state_stationary
 			$bomb/AnimationPlayer.play("Prepare_explosion")
 			$ExplosionTimer.start()
@@ -67,6 +67,8 @@ func pickup(placement_node):
 	pass
 
 func place(position):
+	
+	current_state = state_stationary
 	
 	get_parent().remove_child(self)
 	parent_node.add_child(self)
