@@ -46,3 +46,6 @@ func _on_PlayerCharacter_player_interact() -> void:
 	sfx.stream = interact_trash
 	sfx.play()
 
+
+func _on_GameOver_Replay_Signal() -> void:
+	play_confirm_sfx()

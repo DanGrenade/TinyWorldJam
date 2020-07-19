@@ -18,6 +18,7 @@ func _process(delta):
 		pass
 	
 	if Input.is_action_just_pressed("pause_game"):
+		$Audio.play_confirm_sfx()
 		if current_state == state_playing:
 			stop_game()
 			current_state = state_pause
